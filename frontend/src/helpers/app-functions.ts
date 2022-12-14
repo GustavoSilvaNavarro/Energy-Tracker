@@ -47,6 +47,8 @@ export const getOilProductionByYear = async () => {
     }, [] as unknown as { period: string; total: number }[])
     .reverse();
 
+  console.log(data);
+
   const result = {
     dates: totalByMonth.map(item => getMonths(item.period.split('-')[1])),
     total: totalByMonth.map(item => item.total),

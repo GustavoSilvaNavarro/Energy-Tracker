@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       colors: {
         'dark-blue': '#002244',
+        'white-transparent': '#ffffff1a',
       }
     },
   },
