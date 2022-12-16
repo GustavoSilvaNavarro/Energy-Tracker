@@ -47,4 +47,32 @@ export interface IRequestData {
   end: string;
   offset: number;
   length: number;
+  endPoint: string;
+}
+
+export type Generation = {
+  period: string;
+  plantCode: number;
+  plantName: string;
+  fuel2002: string;
+  fuelTypeDescription: string;
+  state: string;
+  stateDescription: string;
+  primeMover: string;
+  generation: number;
+  'generation-units': string;
+};
+
+export interface IResponseGeneration {
+  total: number;
+  dateFormat: string;
+  frequency: string;
+  data: Array<Generation>;
+  description: string;
+}
+
+export interface IGeneration {
+  response: IResponseGeneration;
+  request: IRequest;
+  apiVersion: string;
 }

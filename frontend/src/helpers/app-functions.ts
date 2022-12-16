@@ -1,12 +1,6 @@
 import { getCrudeOilProduction } from '../services/crude-data';
 
-const filters = {
-  frequency: 'monthly',
-  start: '2020-01',
-  end: '2020-12',
-  offset: 0,
-  length: 5000,
-};
+import { IRequestData } from '../types/api-types';
 
 const getMonths = (date: string) => {
   const months = {
@@ -28,24 +22,22 @@ const getMonths = (date: string) => {
   return date;
 };
 
-export const getOilProductionByYear = async () => {
+export const getOilProductionByYear = async (filters: IRequestData) => {
   const data = await getCrudeOilProduction(filters);
 
   if (!data) return null;
 
-  const totalByMonth = data.response.data
-    .reduce((acc, current) => {
-      const val = acc.find(item => item.period === current.period);
+  const totalByMonth = data.response.data.reduce((acc, current) => {
+    const val = acc.find(item => item.period === current.period);
 
-      if (!val) {
-        return [...acc, { period: current.period, total: current.value }];
-      }
+    if (!val) {
+      return [...acc, { period: current.period, total: current.value }];
+    }
 
-      val.total += current.value;
+    val.total += current.value;
 
-      return [...acc];
-    }, [] as unknown as { period: string; total: number }[])
-    .reverse();
+    return [...acc];
+  }, [] as unknown as { period: string; total: number }[]);
 
   console.log(data);
 
@@ -56,4 +48,33 @@ export const getOilProductionByYear = async () => {
   };
 
   return result;
+};
+
+export const getProductionByState = async (filters: IRequestData) => {
+  const data = await getCrudeOilProduction(filters);
+
+  if (!data) return null;
+
+  const totalByArea = data.response.data.reduce((acc, current) => {
+    const val = acc.find(item => item.area === current['area-name']);
+
+    if (!val) {
+      return [
+        ...acc,
+        {
+          area: current['area-name'],
+          total: current.value,
+          product: current.product,
+          description: current['series-description'],
+          units: current.units,
+        },
+      ];
+    }
+
+    val.total += current.value;
+
+    return [...acc];
+  }, [] as unknown as { area: string; total: number; product: string; description: string; units: string }[]);
+
+  return totalByArea;
 };

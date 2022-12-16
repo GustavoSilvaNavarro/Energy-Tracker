@@ -3,3 +3,11 @@ export interface IResultProduction {
   total: Array<number>;
   year: string;
 }
+
+export interface IProductionOilByState {
+  area: string;
+  total: number;
+  product: string;
+  description: string;
+  units: string;
+}

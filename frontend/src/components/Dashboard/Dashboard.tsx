@@ -3,18 +3,23 @@ import { useState, useEffect } from 'react';
 import './Dashboard.css';
 
 import { BarChart } from '../BarChart/BarChart';
+import { ProductionList } from '../ProductionList/ProductionList';
 import { IResultProduction } from '../../types/app-types';
-import { getOilProductionByYear } from '../../helpers/app-functions';
+import { getOilProductionByYear, getProductionByState } from '../../helpers/app-functions';
+import { oilFilters, gasFilters } from '../../helpers/filters-api';
+import { oilChart, gasChart } from '../../helpers/chart-info';
 
 export const Dashboard = () => {
   const [monthlyProduction, setMonthlyProduction] = useState<IResultProduction | null>(null);
-  const [year, setYear] = useState('2020');
+  const [naturalGas, setNaturalGas] = useState<IResultProduction | null>(null);
 
   useEffect(() => {
-    void getOilProductionByYear().then(data => setMonthlyProduction(data));
+    void getOilProductionByYear(oilFilters).then(data => setMonthlyProduction(data));
+    void getOilProductionByYear(gasFilters).then(data => setNaturalGas(data));
+    void getProductionByState(oilFilters);
   }, []);
 
-  if (!monthlyProduction) {
+  if (!monthlyProduction || !naturalGas) {
     return (
       <div>
         <h1>Loading data...</h1>
@@ -23,18 +28,17 @@ export const Dashboard = () => {
   }
 
   return (
-    <div>
-      <h1 className="text-center text-3xl text-white font-semibold py-4">Welcome to Energy Tracker - USA</h1>
-      <div className="bg-dark-blue py-3 px-4">
-        <select name="yearSelect" value={year} onChange={e => setYear(e.target.value)}>
-          <option />
-          <option value="2021">2021</option>
-        </select>
+    <div className="dashboardContainer">
+      <div className="chartsContainer">
+        <div className="productionChart__container">
+          <BarChart chartData={monthlyProduction} details={oilChart} />
+        </div>
+        <div className="productionChart__container">
+          <BarChart chartData={naturalGas} details={gasChart} />
+        </div>
       </div>
       <div>
-        <div className="productionChart__container">
-          <BarChart chartData={monthlyProduction} />
-        </div>
+        <ProductionList />
       </div>
     </div>
   );

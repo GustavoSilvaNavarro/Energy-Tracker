@@ -9,17 +9,24 @@ interface IProps {
   year: string;
 }
 
-export const BarChart = ({ chartData }: { chartData: IProps }) => {
+interface IDetailsProps {
+  titleText: string;
+  barColor: string;
+  xTitle: string;
+  yTitle: string;
+}
+
+export const BarChart = ({ chartData, details }: { chartData: IProps; details: IDetailsProps }) => {
   return (
     <Bar
-      className="bg-white-transparent p-4 rounded-md"
+      className="bg-white-transparent p-4 rounded-md flex justify-items-center"
       data={{
         labels: chartData.dates,
         datasets: [
           {
             label: `Year: ${chartData.year}`,
             data: chartData.total,
-            backgroundColor: '#74d9aa',
+            backgroundColor: details.barColor,
           },
         ],
       }}
@@ -34,7 +41,7 @@ export const BarChart = ({ chartData }: { chartData: IProps }) => {
           },
           title: {
             display: true,
-            text: 'Monthly Crude Production in MBBL',
+            text: details.titleText,
             color: '#fff',
             font: {
               size: 18,
@@ -45,13 +52,14 @@ export const BarChart = ({ chartData }: { chartData: IProps }) => {
             },
           },
         },
+        responsive: true,
         scales: {
           y: {
             grid: {
               color: '#ffffff56',
             },
             title: {
-              text: 'MBBL',
+              text: details.yTitle,
               color: '#fff',
               display: true,
             },
@@ -72,7 +80,7 @@ export const BarChart = ({ chartData }: { chartData: IProps }) => {
               color: '#ffffff56',
             },
             title: {
-              text: 'Months',
+              text: details.xTitle,
               color: '#fff',
               display: true,
             },

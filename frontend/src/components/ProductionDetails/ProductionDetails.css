@@ -1,0 +1,45 @@
+.tableInfoContainer {
+  max-width: 675px;
+}
+
+thead, tbody, tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.tableContainer__body {
+  height: 300px;
+  display: block;
+  overflow-y: auto;
+}
+
+.tableContainer__body::-webkit-scrollbar {
+  display: none;
+  height: 8px;
+  width: 8px;
+}
+
+.tableContainer__body::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 4px;
+}
+
+.tableContainer__body::-webkit-scrollbar-thumb:hover {
+  background: #4b4b4b;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.tableContainer__body::-webkit-scrollbar-thumb:active {
+  background-color: #353b48;
+}
+
+.tableContainer__body::-webkit-scrollbar-track {
+background: transparent;
+border-radius: 4px;
+}
+
+.tableContainer__body::-webkit-scrollbar-track:active,
+.tableContainer__body::-webkit-scrollbar-track:hover {
+  background: #353b48;
+}

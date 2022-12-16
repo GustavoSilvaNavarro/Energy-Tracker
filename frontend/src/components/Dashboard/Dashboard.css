@@ -1,4 +1,17 @@
+.dashboardContainer {
+  width: 95%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.chartsContainer {
+  margin: 1rem 0.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .productionChart__container {
-  width: 40%;
+  width: 650px;
   margin: 0.7rem;
 }
