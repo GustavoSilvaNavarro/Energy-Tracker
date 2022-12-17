@@ -4,12 +4,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 import App from './App';
+import { ProductionState } from './context/ProductionState';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <ProductionState>
+      <App />
+    </ProductionState>
   </React.StrictMode>
 );
 

@@ -4,10 +4,17 @@ export interface IResultProduction {
   year: string;
 }
 
-export interface IProductionOilByState {
+export interface IProductionByState {
   area: string;
   total: number;
   product: string;
   description: string;
   units: string;
+}
+
+export interface IProductionContext {
+  oilProduction: IResultProduction | null;
+  ngProduction: IResultProduction | null;
+  oilProductionByState: Array<IProductionByState>;
+  ngProductionByState: Array<IProductionByState>;
 }

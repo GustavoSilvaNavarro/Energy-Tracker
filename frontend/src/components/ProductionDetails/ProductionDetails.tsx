@@ -1,8 +1,8 @@
 import './ProductionDetails.css';
 
-import { IProductionOilByState } from '../../types/app-types';
+import { IProductionByState } from '../../types/app-types';
 
-type IProps = IProductionOilByState;
+type IProps = IProductionByState;
 type IDetails = {
   unit: string;
   title: string;

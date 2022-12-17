@@ -1,32 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 
+import { ProductionContext } from '../../context/ProductionContext';
 import { ProductionDetails } from '../ProductionDetails/ProductionDetails';
-import { getProductionByState } from '../../helpers/app-functions';
-import { oilFilters, gasFilters } from '../../helpers/filters-api';
-import { IProductionOilByState } from '../../types/app-types';
 
 export const ProductionList = () => {
-  const [productionByArea, setProductionByArea] = useState<IProductionOilByState[]>([]);
-  const [gasProduction, setGasProduction] = useState<IProductionOilByState[]>([]);
-
-  useEffect(() => {
-    void getProductionByState(oilFilters).then(data => {
-      if (data) setProductionByArea(data);
-    });
-
-    void getProductionByState(gasFilters).then(gas => {
-      if (gas) setGasProduction(gas);
-    });
-  }, []);
+  const productionCtx = useContext(ProductionContext);
+  if (!productionCtx) {
+    return (
+      <div>
+        <h1>Loading data...</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="flex gap-6 justify-center">
       <ProductionDetails
-        production={productionByArea}
+        production={productionCtx.oilProductionByState}
         details={{ unit: 'MBBL', title: 'Monthly Oil Production by State' }}
       />
       <ProductionDetails
-        production={gasProduction}
+        production={productionCtx.ngProductionByState}
         details={{ unit: 'MMCF', title: 'Monthly Natural Gas Production by State' }}
       />
     </div>

@@ -1,25 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 
 import './Dashboard.css';
 
+import { ProductionContext } from '../../context/ProductionContext';
 import { BarChart } from '../BarChart/BarChart';
 import { ProductionList } from '../ProductionList/ProductionList';
-import { IResultProduction } from '../../types/app-types';
-import { getOilProductionByYear, getProductionByState } from '../../helpers/app-functions';
-import { oilFilters, gasFilters } from '../../helpers/filters-api';
 import { oilChart, gasChart } from '../../helpers/chart-info';
 
 export const Dashboard = () => {
-  const [monthlyProduction, setMonthlyProduction] = useState<IResultProduction | null>(null);
-  const [naturalGas, setNaturalGas] = useState<IResultProduction | null>(null);
+  const productionCtx = useContext(ProductionContext);
 
-  useEffect(() => {
-    void getOilProductionByYear(oilFilters).then(data => setMonthlyProduction(data));
-    void getOilProductionByYear(gasFilters).then(data => setNaturalGas(data));
-    void getProductionByState(oilFilters);
-  }, []);
-
-  if (!monthlyProduction || !naturalGas) {
+  if (!productionCtx || !productionCtx.oilProduction || !productionCtx.ngProduction) {
     return (
       <div>
         <h1>Loading data...</h1>
@@ -31,10 +22,10 @@ export const Dashboard = () => {
     <div className="dashboardContainer">
       <div className="chartsContainer">
         <div className="productionChart__container">
-          <BarChart chartData={monthlyProduction} details={oilChart} />
+          <BarChart chartData={productionCtx.oilProduction} details={oilChart} />
         </div>
         <div className="productionChart__container">
-          <BarChart chartData={naturalGas} details={gasChart} />
+          <BarChart chartData={productionCtx.ngProduction} details={gasChart} />
         </div>
       </div>
       <div>

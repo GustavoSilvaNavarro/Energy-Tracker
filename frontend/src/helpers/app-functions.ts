@@ -1,6 +1,4 @@
-import { getCrudeOilProduction } from '../services/crude-data';
-
-import { IRequestData } from '../types/api-types';
+import { ICrudProduction } from '../types/api-types';
 
 const getMonths = (date: string) => {
   const months = {
@@ -22,11 +20,7 @@ const getMonths = (date: string) => {
   return date;
 };
 
-export const getOilProductionByYear = async (filters: IRequestData) => {
-  const data = await getCrudeOilProduction(filters);
-
-  if (!data) return null;
-
+export const getProductionByYear = (data: ICrudProduction, year: string) => {
   const totalByMonth = data.response.data.reduce((acc, current) => {
     const val = acc.find(item => item.period === current.period);
 
@@ -39,22 +33,16 @@ export const getOilProductionByYear = async (filters: IRequestData) => {
     return [...acc];
   }, [] as unknown as { period: string; total: number }[]);
 
-  console.log(data);
-
   const result = {
     dates: totalByMonth.map(item => getMonths(item.period.split('-')[1])),
     total: totalByMonth.map(item => item.total),
-    year: filters.end.split('-')[0],
+    year: year.split('-')[0],
   };
 
   return result;
 };
 
-export const getProductionByState = async (filters: IRequestData) => {
-  const data = await getCrudeOilProduction(filters);
-
-  if (!data) return null;
-
+export const getProductionByState = (data: ICrudProduction) => {
   const totalByArea = data.response.data.reduce((acc, current) => {
     const val = acc.find(item => item.area === current['area-name']);
 
