@@ -20,6 +20,12 @@ const getMonths = (date: string) => {
   return date;
 };
 
+export const getMaxDate = () => {
+  const date = new Date();
+
+  return date.setFullYear(date.getFullYear() - 1);
+};
+
 export const getProductionByYear = (data: ICrudProduction, year: string) => {
   const totalByMonth = data.response.data.reduce((acc, current) => {
     const val = acc.find(item => item.period === current.period);
@@ -95,7 +101,6 @@ export const getAccumulativeGeneration = (data: IGeneration, year: string) => {
 };
 
 export const netGenerationByFuelType = (data: IGeneration) => {
-  console.log(data);
   const powerByFuel = data.response.data.reduce((acc, current) => {
     const value = acc.find(item => item.fuelCode === current.fuel2002);
 
@@ -113,6 +118,5 @@ export const netGenerationByFuelType = (data: IGeneration) => {
     total: powerByFuel.map(item => item.total),
   };
 
-  console.log(result);
   return result;
 };

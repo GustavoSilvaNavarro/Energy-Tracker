@@ -22,6 +22,7 @@ export interface IProductionContext {
   ngProduction: IResultProduction | null;
   oilProductionByState: Array<IProductionByState>;
   ngProductionByState: Array<IProductionByState>;
+  retrieveAPIInfo: (date: number) => Promise<void>;
 }
 
 export interface IStateDetails {
