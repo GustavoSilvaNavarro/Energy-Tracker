@@ -24,7 +24,7 @@ export const BarChart = ({ chartData, details }: { chartData: IProps; details: I
         labels: chartData.dates,
         datasets: [
           {
-            label: `Year: ${chartData.year}`,
+            label: `Year ${chartData.year}`,
             data: chartData.total,
             backgroundColor: details.barColor,
           },

@@ -4,4 +4,5 @@ export const env = {
   crudeEndPoint: process.env.REACT_APP_ENDPOINT_OPEN_DATA as string,
   naturalGasEndPoint: process.env.REACT_APP_NATURAL_GAS_PRODUCTION as string,
   netGeneration: process.env.REACT_APP_NET_GENERATION as string,
+  urlServer: process.env.REACT_APP_URL_BASE_SERVER as string,
 };

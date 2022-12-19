@@ -50,6 +50,10 @@ export interface IRequestData {
   endPoint: string;
 }
 
+export interface IGenerationFilter extends IRequestData {
+  state: string;
+}
+
 export type Generation = {
   period: string;
   plantCode: number;
@@ -75,4 +79,10 @@ export interface IGeneration {
   response: IResponseGeneration;
   request: IRequest;
   apiVersion: string;
+}
+
+export interface IListOfStates {
+  id: number;
+  name: string;
+  postal: string;
 }

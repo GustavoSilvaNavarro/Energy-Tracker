@@ -7,9 +7,14 @@ const env = {
   dbDialect: process.env.DB_SQL_DIALECT,
   dbAppPort: Number(process.env.PORT_PROD),
   clientAppUrl: process.env.CLIENT_DOMAIN,
-  opeDataPublicKey: process.env.OPEN_DATA_API_KEY as string,
-  openDataBaseUrl: process.env.URL_OPEN_DATA_API as string,
-  endPointApi: process.env.ENDPOINT_OPEN_DATA as string,
+  statesDetailsEndpoint: process.env.USE_STATE_RAPID_API_ENDPOINT as string,
+  statesDetailsSecretKey: process.env.USE_STATE_RAPID_API_KEYS as string,
+  statesDetailsHost: process.env.USE_STATE_RAPID_API_HOST as string,
 };
+
+if (process.env.NODE_ENV === 'testing') {
+  env.dbDataBaseName = process.env.DB_SQL_DATABASENAME_TESTS as string;
+  env.dbAppPort = Number(process.env.PORT_TESTS);
+}
 
 export default env;

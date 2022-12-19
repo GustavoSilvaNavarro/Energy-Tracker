@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ProductionContext } from '../../context/ProductionContext';
+import { ProductionContext } from '../../context/Production/ProductionContext';
 import { ProductionDetails } from '../ProductionDetails/ProductionDetails';
 
 export const ProductionList = () => {

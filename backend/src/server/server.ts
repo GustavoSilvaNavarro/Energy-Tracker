@@ -3,7 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 
 import env from '../config/env';
-import crudeProduction from '../routes/oilProduction-routes';
+import stateDetailsRoutes from '../routes/stateDetails-routes';
 import { pageNotFound } from '../middleware/pageNotFound';
 import { errorHandler } from '../middleware/error-handler';
 
@@ -19,7 +19,7 @@ app.use(
 );
 app.use(morgan('dev'));
 
-app.use('/crude-api', crudeProduction);
+app.use('/states-list', stateDetailsRoutes);
 
 app.use('*', pageNotFound);
 app.use(errorHandler);

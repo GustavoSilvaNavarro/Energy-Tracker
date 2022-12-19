@@ -4,14 +4,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 import App from './App';
-import { ProductionState } from './context/ProductionState';
+import { ProductionState } from './context/Production/ProductionState';
+import { GenerationState } from './context/Generation/GenerationState';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <ProductionState>
-      <App />
+      <GenerationState>
+        <App />
+      </GenerationState>
     </ProductionState>
   </React.StrictMode>
 );

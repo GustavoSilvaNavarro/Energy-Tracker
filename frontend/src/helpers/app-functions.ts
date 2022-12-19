@@ -1,4 +1,4 @@
-import { ICrudProduction } from '../types/api-types';
+import { ICrudProduction, IGeneration } from '../types/api-types';
 
 const getMonths = (date: string) => {
   const months = {
@@ -65,4 +65,54 @@ export const getProductionByState = (data: ICrudProduction) => {
   }, [] as unknown as { area: string; total: number; product: string; description: string; units: string }[]);
 
   return totalByArea;
+};
+
+export const getAccumulativeGeneration = (data: IGeneration, year: string) => {
+  const electricityByMonth = data.response.data.reduce((acc, current) => {
+    const value = acc.find(element => element.period === current.period);
+
+    if (!value) {
+      return [...acc, { period: current.period, total: current.generation }];
+    }
+
+    value.total += current.generation;
+
+    return [...acc];
+  }, [] as unknown as { period: string; total: number }[]);
+
+  const result = {
+    dates: electricityByMonth.map(item => getMonths(item.period.split('-')[1])),
+    total: electricityByMonth.map(
+      (
+        sum => item =>
+          (sum += item.total)
+      )(0)
+    ),
+    year: year.split('-')[0],
+  };
+
+  return result;
+};
+
+export const netGenerationByFuelType = (data: IGeneration) => {
+  console.log(data);
+  const powerByFuel = data.response.data.reduce((acc, current) => {
+    const value = acc.find(item => item.fuelCode === current.fuel2002);
+
+    if (!value) {
+      return [...acc, { fuel: current.fuelTypeDescription, total: current.generation, fuelCode: current.fuel2002 }];
+    }
+
+    value.total += current.generation;
+
+    return [...acc];
+  }, [] as unknown as { fuel: string; total: number; fuelCode: string }[]);
+
+  const result = {
+    fuelTypes: powerByFuel.map(item => item.fuel),
+    total: powerByFuel.map(item => item.total),
+  };
+
+  console.log(result);
+  return result;
 };

@@ -2,8 +2,10 @@ import { useContext } from 'react';
 
 import './Dashboard.css';
 
-import { ProductionContext } from '../../context/ProductionContext';
+import { ProductionContext } from '../../context/Production/ProductionContext';
 import { BarChart } from '../BarChart/BarChart';
+import { GenerationByFuel } from '../GenerationByFuel/GenerationByFuel';
+import { LineChart } from '../LineChart/LineChart';
 import { ProductionList } from '../ProductionList/ProductionList';
 import { oilChart, gasChart } from '../../helpers/chart-info';
 
@@ -30,6 +32,10 @@ export const Dashboard = () => {
       </div>
       <div>
         <ProductionList />
+      </div>
+      <div className="flex items-center justify-center gap-x-8 mt-8">
+        <LineChart />
+        <GenerationByFuel />
       </div>
     </div>
   );

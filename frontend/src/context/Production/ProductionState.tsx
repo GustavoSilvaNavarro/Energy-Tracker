@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 
 import { ProductionContext } from './ProductionContext';
-import { IResultProduction, IProductionByState } from '../types/app-types';
-import { getCrudeOilProduction } from '../services/crude-data';
-import { getProductionByYear, getProductionByState } from '../helpers/app-functions';
-import { oilFilters, gasFilters } from '../helpers/filters-api';
+import { IResultProduction, IProductionByState } from '../../types/app-types';
+import { getCrudeOilProduction } from '../../services/crude-data';
+import { getProductionByYear, getProductionByState } from '../../helpers/app-functions';
+import { oilFilters, gasFilters } from '../../helpers/filters-api';
 
 export const ProductionState = ({ children }: { children: JSX.Element }) => {
   const [oilProduction, setOilProduction] = useState<IResultProduction | null>(null);

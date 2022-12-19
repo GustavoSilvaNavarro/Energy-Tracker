@@ -4,6 +4,11 @@ export interface IResultProduction {
   year: string;
 }
 
+export interface IGenerationResult {
+  fuelTypes: Array<string>;
+  total: Array<number>;
+}
+
 export interface IProductionByState {
   area: string;
   total: number;
@@ -17,4 +22,15 @@ export interface IProductionContext {
   ngProduction: IResultProduction | null;
   oilProductionByState: Array<IProductionByState>;
   ngProductionByState: Array<IProductionByState>;
+}
+
+export interface IStateDetails {
+  id: number;
+  name: string;
+  postal: string;
+}
+
+export interface IGenerationContext {
+  netGeneration: IResultProduction | null;
+  powerByFuel: IGenerationResult | null;
 }
