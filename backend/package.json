@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "node .",
+    "prestart": "npm run build:webpack",
     "format-check:prettier": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
     "start:dev": "nodemon src/app.ts --exec ts-node",
