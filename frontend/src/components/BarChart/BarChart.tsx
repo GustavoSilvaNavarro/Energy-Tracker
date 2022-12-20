@@ -53,6 +53,7 @@ export const BarChart = ({ chartData, details }: { chartData: IProps; details: I
           },
         },
         responsive: true,
+        maintainAspectRatio: false,
         scales: {
           y: {
             grid: {

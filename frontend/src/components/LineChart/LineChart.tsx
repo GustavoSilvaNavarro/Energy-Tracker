@@ -11,6 +11,7 @@ import {
   Legend,
   Filler,
 } from 'chart.js';
+import { ClipLoader } from 'react-spinners';
 
 import './LineChart.css';
 
@@ -23,14 +24,17 @@ export const LineChart = () => {
 
   if (!generationCtx || !generationCtx.netGeneration) {
     return (
-      <div>
-        <h2>Loading...</h2>
-      </div>
+      <section className="LineChartContainer">
+        <div className="flex flex-col justify-center items-center">
+          <ClipLoader color="#fff" size={75} speedMultiplier={1} loading={true} />
+          <h3 className="text-white spinnerLoader__title text-base">Loading...</h3>
+        </div>
+      </section>
     );
   }
 
   return (
-    <div className="LineChartContainer">
+    <div className="LineChartContainer flex justify-center items-center">
       <Line
         className="bg-white-transparent p-4 rounded-md flex justify-items-center"
         data={{
@@ -47,6 +51,7 @@ export const LineChart = () => {
         }}
         options={{
           responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
               position: 'top',

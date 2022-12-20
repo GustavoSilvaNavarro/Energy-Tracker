@@ -9,6 +9,42 @@ body {
   background-color: #1d262b;
 }
 
+body::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 4px;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: #4b4b4b;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+body::-webkit-scrollbar-thumb:active {
+  background-color: #353b48;
+}
+
+body::-webkit-scrollbar-track {
+background: #282a2d;
+border-radius: 4px;
+}
+
+body::-webkit-scrollbar-track:active,
+body::-webkit-scrollbar-track:hover {
+  background: #2e3033;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (max-width: 450px) {
+  body {
+    width: 450px;
+    overflow-x: auto;
+  }
+}

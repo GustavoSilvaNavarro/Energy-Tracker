@@ -1,3 +1,26 @@
 .LineChartContainer {
   width: 800px;
+  height: 400px;
+  margin-bottom: 1.5rem;
+}
+
+@media (max-width: 850px) {
+  .LineChartContainer {
+    width: 600px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 630px) {
+  .LineChartContainer {
+    width: 500px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 520px) {
+  .LineChartContainer {
+    width: 400px;
+    height: 200px;
+  }
 }

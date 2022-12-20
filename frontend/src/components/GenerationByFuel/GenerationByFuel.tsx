@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import { ClipLoader } from 'react-spinners';
 
 import './GenerationByFuel.css';
 
@@ -13,9 +14,12 @@ export const GenerationByFuel = () => {
 
   if (!generationCtx || !generationCtx.powerByFuel) {
     return (
-      <div>
-        <h2>Loading...</h2>
-      </div>
+      <section className="DoughnutChartContainer">
+        <div className="flex flex-col justify-center items-center">
+          <ClipLoader color="#fff" size={75} speedMultiplier={1} loading={true} />
+          <h3 className="text-white spinnerLoader__title text-base">Loading...</h3>
+        </div>
+      </section>
     );
   }
 

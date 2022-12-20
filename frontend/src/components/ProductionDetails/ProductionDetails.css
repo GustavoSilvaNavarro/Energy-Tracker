@@ -43,3 +43,9 @@ border-radius: 4px;
 .tableContainer__body::-webkit-scrollbar-track:hover {
   background: #353b48;
 }
+
+@media (max-width: 850px) {
+  .tableInfoContainer {
+    max-width: 550px;
+  }
+}

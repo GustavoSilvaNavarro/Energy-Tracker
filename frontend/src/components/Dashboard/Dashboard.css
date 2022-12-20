@@ -13,5 +13,45 @@
 
 .productionChart__container {
   width: 650px;
+  height: 325px;
   margin: 0.7rem;
+}
+
+.spinnerLoader__title {
+  font-size: 1.4rem;
+  animation: expansion 1s infinite ease-in-out;
+  -webkit-animation: expansion 1s infinite ease-in-out;
+}
+
+@keyframes expansion {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 850px) {
+  .productionChart__container {
+    width: 450px;
+    height: 250px;
+  }
+}
+
+
+@media (max-width: 450px) {
+  .productionChart__container {
+    width: 350px;
+    height: 200px;
+  }
 }

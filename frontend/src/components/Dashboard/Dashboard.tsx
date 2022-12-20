@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { BallTriangle } from 'react-loader-spinner';
 
 import './Dashboard.css';
 
@@ -16,31 +17,41 @@ export const Dashboard = () => {
 
   if (!productionCtx || !productionCtx.oilProduction || !productionCtx.ngProduction) {
     return (
-      <div>
-        <h1>Loading data...</h1>
-      </div>
+      <section className="h-screen flex justify-center items-center">
+        <div className="flex flex-col justify-center items-center">
+          <BallTriangle
+            height={200}
+            width={200}
+            radius={5}
+            ariaLabel="ball-triangle-loading"
+            visible={true}
+            color="#4361ee"
+          />
+          <h3 className="text-[#4361ee] spinnerLoader__title">Loading data...</h3>
+        </div>
+      </section>
     );
   }
 
   return (
     <div className="dashboardContainer">
       <Header />
-      <div className="chartsContainer">
+      <section className="chartsContainer">
         <div className="productionChart__container">
           <BarChart chartData={productionCtx.oilProduction} details={oilChart} />
         </div>
         <div className="productionChart__container">
           <BarChart chartData={productionCtx.ngProduction} details={gasChart} />
         </div>
-      </div>
-      <div>
+      </section>
+      <section>
         <ProductionList />
-      </div>
+      </section>
       <PowerHeader />
-      <div className="flex items-center justify-center gap-x-8 mt-8">
+      <section className="flex items-center flex-wrap justify-center gap-x-8 mt-8">
         <LineChart />
         <GenerationByFuel />
-      </div>
+      </section>
     </div>
   );
 };

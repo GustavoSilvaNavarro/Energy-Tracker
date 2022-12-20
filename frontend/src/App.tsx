@@ -4,9 +4,9 @@ import { Dashboard } from './components/Dashboard/Dashboard';
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <Dashboard />
-    </div>
+    </main>
   );
 }
 
