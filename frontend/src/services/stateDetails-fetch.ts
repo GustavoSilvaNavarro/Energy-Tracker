@@ -5,7 +5,12 @@ import { IStateDetails } from '../types/app-types';
 
 export const getListOfStates = async () => {
   try {
-    const result = await axios.get(`${env.urlServer}/states-list/details`);
+    const result = await axios.get(`${env.urlServer}/states-list/details`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
 
     const list = result.data as unknown as Array<IStateDetails>;
     return list;
