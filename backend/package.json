@@ -12,7 +12,8 @@
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
     "start:dev": "nodemon src/app.ts --exec ts-node",
     "build": "tsc",
-    "start:production": "npm run build && node .",
+    "build:webpack": "webpack",
+    "start:production": "npm run build:webpack && node .",
     "clean": "rmdir dist",
     "test": "jest --runInBand",
     "test:coverage": "jest --coverage",
@@ -32,6 +33,8 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "mysql2": "^2.3.3",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
     "sequelize": "^6.27.0"
   },
   "devDependencies": {
@@ -47,8 +50,13 @@
     "eslint-plugin-prettier": "^4.2.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.20",
+    "nodemon-webpack-plugin": "^4.8.1",
     "prettier": "^2.8.1",
+    "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.4"
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-node-externals": "^3.0.0"
   }
 }
