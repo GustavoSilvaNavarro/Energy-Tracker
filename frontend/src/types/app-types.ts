@@ -2,6 +2,7 @@ export interface IResultProduction {
   dates: Array<string>;
   total: Array<number>;
   year: string;
+  state?: string;
 }
 
 export interface IGenerationResult {
@@ -34,4 +35,5 @@ export interface IStateDetails {
 export interface IGenerationContext {
   netGeneration: IResultProduction | null;
   powerByFuel: IGenerationResult | null;
+  retrieveGenerationData: (date: number, state: string) => Promise<void>;
 }

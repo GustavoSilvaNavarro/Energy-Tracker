@@ -57,7 +57,9 @@ export const LineChart = () => {
             },
             title: {
               display: true,
-              text: 'Monthly Cumulative Electricity Generation in VT',
+              text: `Monthly Cumulative Electricity Generation in ${
+                generationCtx.netGeneration.state ? generationCtx.netGeneration.state : ''
+              }`,
               color: '#fff',
               font: {
                 size: 18,

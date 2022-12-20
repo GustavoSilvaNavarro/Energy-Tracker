@@ -73,7 +73,7 @@ export const getProductionByState = (data: ICrudProduction) => {
   return totalByArea;
 };
 
-export const getAccumulativeGeneration = (data: IGeneration, year: string) => {
+export const getAccumulativeGeneration = (data: IGeneration, year: string, state: string) => {
   const electricityByMonth = data.response.data.reduce((acc, current) => {
     const value = acc.find(element => element.period === current.period);
 
@@ -95,6 +95,7 @@ export const getAccumulativeGeneration = (data: IGeneration, year: string) => {
       )(0)
     ),
     year: year.split('-')[0],
+    state,
   };
 
   return result;

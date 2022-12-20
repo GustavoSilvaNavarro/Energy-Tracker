@@ -24,7 +24,7 @@ export const Header = () => {
       <div className="py-3 px-4 bg-[#1f2937] rounded-md">
         <h2 className="text-white text-center font-semibold">Monthly Oil & Gas Production throughout USA</h2>
         <div className="flex items-center justify-end">
-          <div className="inputSizes">
+          <div className="w-[200px] mr-16">
             <label className="text-center text-white block" htmlFor="dateByYear">
               Year
             </label>
