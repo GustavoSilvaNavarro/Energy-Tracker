@@ -9,6 +9,7 @@ import { env } from '../../helpers/env';
 export const GenerationState = ({ children }: { children: JSX.Element }) => {
   const [netGeneration, setNetGeneration] = useState<IResultProduction | null>(null);
   const [powerByFuel, setPowerByFuel] = useState<IGenerationResult | null>(null);
+  const [loadingStatus, setLoadingStatus] = useState(false);
 
   useEffect(() => {
     void retrieveGenerationData();
@@ -34,10 +35,14 @@ export const GenerationState = ({ children }: { children: JSX.Element }) => {
 
     const data = netGenerationByFuelType(generation);
     setPowerByFuel(data);
+
+    setLoadingStatus(false);
   };
 
   return (
-    <GenerationContext.Provider value={{ netGeneration, powerByFuel, retrieveGenerationData }}>
+    <GenerationContext.Provider
+      value={{ netGeneration, powerByFuel, retrieveGenerationData, loadingStatus, setLoadingStatus }}
+    >
       {children}
     </GenerationContext.Provider>
   );

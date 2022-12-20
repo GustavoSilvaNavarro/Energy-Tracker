@@ -14,6 +14,7 @@ export const Header = () => {
     if (currentDate === date) return;
     setCurrentDate(date);
     if (productionCtx) {
+      productionCtx.setLoadingStatus(true);
       void productionCtx.retrieveAPIInfo(date.getFullYear());
     }
   };
@@ -30,6 +31,7 @@ export const Header = () => {
             </label>
             <DatePicker
               id="dateByYear"
+              disabled={productionCtx?.loadingStatus}
               className="bg-gray-50 border border-gray-300 text-center text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               selected={currentDate}
               minDate={new Date('01/01/2000')}

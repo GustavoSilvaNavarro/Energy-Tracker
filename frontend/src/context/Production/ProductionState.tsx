@@ -11,6 +11,7 @@ export const ProductionState = ({ children }: { children: JSX.Element }) => {
   const [oilProductionByState, setOilProductionByState] = useState<IProductionByState[]>([]);
   const [ngProduction, setNgProduction] = useState<IResultProduction | null>(null);
   const [ngProductionByState, setNgProductionByState] = useState<Array<IProductionByState>>([]);
+  const [loadingStatus, setLoadingStatus] = useState(false);
 
   useEffect(() => {
     void retrieveAPIInfo();
@@ -54,6 +55,8 @@ export const ProductionState = ({ children }: { children: JSX.Element }) => {
         setNgProduction(ngMonthlyProduction);
         setNgProductionByState(ngByState);
       }
+
+      setLoadingStatus(false);
     } catch (err) {
       console.error(err);
     }
@@ -61,7 +64,15 @@ export const ProductionState = ({ children }: { children: JSX.Element }) => {
 
   return (
     <ProductionContext.Provider
-      value={{ oilProduction, ngProduction, oilProductionByState, ngProductionByState, retrieveAPIInfo }}
+      value={{
+        oilProduction,
+        ngProduction,
+        oilProductionByState,
+        ngProductionByState,
+        retrieveAPIInfo,
+        loadingStatus,
+        setLoadingStatus,
+      }}
     >
       {children}
     </ProductionContext.Provider>

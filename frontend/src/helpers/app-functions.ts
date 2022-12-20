@@ -103,7 +103,7 @@ export const getAccumulativeGeneration = (data: IGeneration, year: string, state
 
 export const netGenerationByFuelType = (data: IGeneration) => {
   const powerByFuel = data.response.data.reduce((acc, current) => {
-    const value = acc.find(item => item.fuelCode === current.fuel2002);
+    const value = acc.find(item => item.fuel === current.fuelTypeDescription);
 
     if (!value) {
       return [...acc, { fuel: current.fuelTypeDescription, total: current.generation, fuelCode: current.fuel2002 }];

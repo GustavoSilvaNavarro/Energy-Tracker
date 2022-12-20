@@ -24,6 +24,8 @@ export interface IProductionContext {
   oilProductionByState: Array<IProductionByState>;
   ngProductionByState: Array<IProductionByState>;
   retrieveAPIInfo: (date: number) => Promise<void>;
+  loadingStatus: boolean;
+  setLoadingStatus: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface IStateDetails {
@@ -36,4 +38,6 @@ export interface IGenerationContext {
   netGeneration: IResultProduction | null;
   powerByFuel: IGenerationResult | null;
   retrieveGenerationData: (date: number, state: string) => Promise<void>;
+  loadingStatus: boolean;
+  setLoadingStatus: React.Dispatch<React.SetStateAction<boolean>>;
 }

@@ -5,15 +5,18 @@ import './Dashboard.css';
 
 import { Header } from '../Header/Header';
 import { ProductionContext } from '../../context/Production/ProductionContext';
+import { GenerationContext } from '../../context/Generation/GenerationContext';
 import { BarChart } from '../BarChart/BarChart';
 import { PowerHeader } from '../PowerHeader/PowerHeader';
 import { GenerationByFuel } from '../GenerationByFuel/GenerationByFuel';
 import { LineChart } from '../LineChart/LineChart';
 import { ProductionList } from '../ProductionList/ProductionList';
 import { oilChart, gasChart } from '../../helpers/chart-info';
+import { Loader } from '../Loader/Loader';
 
 export const Dashboard = () => {
   const productionCtx = useContext(ProductionContext);
+  const generationCtx = useContext(GenerationContext);
 
   if (!productionCtx || !productionCtx.oilProduction || !productionCtx.ngProduction) {
     return (
@@ -37,11 +40,13 @@ export const Dashboard = () => {
     <div className="dashboardContainer">
       <Header />
       <section className="chartsContainer">
-        <div className="productionChart__container">
+        <div className="productionChart__container relative">
           <BarChart chartData={productionCtx.oilProduction} details={oilChart} />
+          <Loader status={productionCtx.loadingStatus} />
         </div>
-        <div className="productionChart__container">
+        <div className="productionChart__container relative">
           <BarChart chartData={productionCtx.ngProduction} details={gasChart} />
+          <Loader status={productionCtx.loadingStatus} />
         </div>
       </section>
       <section>
@@ -49,8 +54,14 @@ export const Dashboard = () => {
       </section>
       <PowerHeader />
       <section className="flex items-center flex-wrap justify-center gap-x-8 mt-8">
-        <LineChart />
-        <GenerationByFuel />
+        <div className="relative">
+          <LineChart />
+          <Loader status={generationCtx && generationCtx.loadingStatus ? true : false} />
+        </div>
+        <div className="relative">
+          <GenerationByFuel />
+          <Loader status={generationCtx && generationCtx.loadingStatus ? true : false} />
+        </div>
       </section>
     </div>
   );

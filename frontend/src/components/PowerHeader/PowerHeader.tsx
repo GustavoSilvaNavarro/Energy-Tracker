@@ -17,6 +17,7 @@ export const PowerHeader = () => {
     if (currentDate === date) return;
     setCurrentDate(date);
     if (generationCtx) {
+      generationCtx.setLoadingStatus(true);
       void generationCtx.retrieveGenerationData(date.getFullYear(), state);
     }
   };
@@ -25,6 +26,7 @@ export const PowerHeader = () => {
     if (state === e.target.value) return;
     setState(e.target.value);
     if (generationCtx) {
+      generationCtx.setLoadingStatus(true);
       void generationCtx.retrieveGenerationData(currentDate.getFullYear(), e.target.value);
     }
   };
@@ -40,6 +42,7 @@ export const PowerHeader = () => {
             </label>
             <DatePicker
               id="dateByState"
+              disabled={generationCtx?.loadingStatus}
               className="bg-gray-50 border border-gray-300 text-center text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               selected={currentDate}
               minDate={new Date('01/01/2000')}
@@ -55,6 +58,7 @@ export const PowerHeader = () => {
             </label>
             <select
               id="stateSelectField"
+              disabled={generationCtx?.loadingStatus}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               value={state}
               onChange={e => handleSelectChange(e)}

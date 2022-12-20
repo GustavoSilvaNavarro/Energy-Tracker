@@ -3,6 +3,7 @@ import { ClipLoader } from 'react-spinners';
 
 import { ProductionContext } from '../../context/Production/ProductionContext';
 import { ProductionDetails } from '../ProductionDetails/ProductionDetails';
+import { Loader } from '../Loader/Loader';
 
 export const ProductionList = () => {
   const productionCtx = useContext(ProductionContext);
@@ -19,14 +20,20 @@ export const ProductionList = () => {
 
   return (
     <div className="flex flex-wrap gap-6 justify-center">
-      <ProductionDetails
-        production={productionCtx.oilProductionByState}
-        details={{ unit: 'MBBL', title: 'Monthly Oil Production by State' }}
-      />
-      <ProductionDetails
-        production={productionCtx.ngProductionByState}
-        details={{ unit: 'MMCF', title: 'Monthly Natural Gas Production by State' }}
-      />
+      <div className="relative">
+        <ProductionDetails
+          production={productionCtx.oilProductionByState}
+          details={{ unit: 'MBBL', title: 'Monthly Oil Production by State' }}
+        />
+        <Loader status={productionCtx.loadingStatus} />
+      </div>
+      <div className="relative">
+        <ProductionDetails
+          production={productionCtx.ngProductionByState}
+          details={{ unit: 'MMCF', title: 'Monthly Natural Gas Production by State' }}
+        />
+        <Loader status={productionCtx.loadingStatus} />
+      </div>
     </div>
   );
 };

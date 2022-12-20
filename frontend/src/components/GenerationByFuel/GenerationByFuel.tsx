@@ -67,7 +67,7 @@ export const GenerationByFuel = () => {
           responsive: true,
           plugins: {
             legend: {
-              position: 'right',
+              position: 'bottom',
               align: 'center',
               labels: {
                 color: '#fff',
