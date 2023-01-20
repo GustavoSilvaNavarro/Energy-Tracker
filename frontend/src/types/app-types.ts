@@ -41,3 +41,13 @@ export interface IGenerationContext {
   loadingStatus: boolean;
   setLoadingStatus: React.Dispatch<React.SetStateAction<boolean>>;
 }
+
+//? Service Worker Types
+export interface IConfig {
+  onUpdate?: (registration: ServiceWorkerRegistration) => Promise<void>;
+  onSuccess?: (registration: ServiceWorkerRegistration) => Promise<void>;
+}
+
+export interface ExtendableMessageEvent {
+  data?: { type: string };
+}
