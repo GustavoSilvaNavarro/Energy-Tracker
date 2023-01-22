@@ -15,7 +15,7 @@
     "build": "tsc",
     "build:webpack": "webpack",
     "start:production": "npm run build:webpack && node .",
-    "clean": "rmdir dist",
+    "clean": "rmdir /s /q dist",
     "test": "jest --runInBand",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"

@@ -4,6 +4,8 @@
   <img src="https://user-images.githubusercontent.com/66889974/213705383-18ab7760-b9a9-4195-a8c6-bb64cc2c2fd4.png" />
 </p>
 
+Energy Tracker is a web application to keep track and see the trend of the Oil & Gas Production throughout the USA (by state and year). Beside that, you can check the energy consumption (electricity) associated to the production of Oil & Gas. You can check all this information in a beautiful dashboard that includes charts and tables.
+
 ## Screenshots
 
 <p align="center">
@@ -23,7 +25,7 @@ cd Energy-Tracker
 
 2. Run command to install dependencies backend and frontend
 ```shell
-npm install
+yarn || npm i
 ```
 
 ### Backend

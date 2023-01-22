@@ -1,6 +1,6 @@
 import express, { Application } from 'express';
 import cors from 'cors';
-// import morgan from 'morgan';
+import morgan from 'morgan';
 
 import env from '../config/env';
 import stateDetailsRoutes from '../routes/stateDetails-routes';
@@ -17,7 +17,7 @@ app.use(
     origin: env.clientAppUrl,
   })
 );
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 
 app.use('/states-list', stateDetailsRoutes);
 
