@@ -1,6 +1,6 @@
 # Custom folders
-/.vscode
 /.husky
+/pgdata
 
 # Dependency directories
 /node_modules

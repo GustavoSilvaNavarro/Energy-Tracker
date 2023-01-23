@@ -1,32 +1,9 @@
 version: '3.9'
 
 services:
-  server:
-    container_name: enertrack-server
-    build: ./backend/
-    ports:
-      - 3001:8080
-    volumes:
-      - .:/home/node/backend
-      - /home/node/backend/node_modules
-    links:
-      - db
-    environment:
-      - NODE_ENV=development
-      - DB_SQL_HOST=db_energyTrack
-      - DB_SQL_USERNAME=postgres
-      - DB_SQL_PORT=5432
-      - DB_SQL_PASSWORD=superSecretDBPassword
-      - DB_SQL_DATABASENAME=energyTrack_db
-      - DB_SQL_DIALECT=postgres
-      - CLIENT_DOMAIN=http://localhost:3000
-      - USE_STATE_RAPID_API_ENDPOINT=https://us-states.p.rapidapi.com/basic
-      - USE_STATE_RAPID_API_KEYS=eaf3f3482fmshe79fbc15b92c778p14e599jsne16217fbe1e7
-      - USE_STATE_RAPID_API_HOST=us-states.p.rapidapi.com]
-
   db:
     image: postgres:15-alpine
-    container_name: db_energyTrack
+    container_name: postgres-db
     restart: always
     environment:
       - POSTGRES_PASSWORD=superSecretDBPassword
@@ -34,8 +11,41 @@ services:
       - POSTGRES_DB=energyTrack_db
     ports:
       - 5432:5432
+    networks:
+      - myshared-network
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
+
+  server:
+    container_name: enertrack-server
+    restart: unless-stopped
+    image: enertrack-server:1.0.0
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    networks:
+      - myshared-network
+    depends_on:
+      - db
+
+  client:
+    container_name: enertrack-client
+    restart: unless-stopped
+    image: enertrack-client:1.0.0
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - myshared-network
+    depends_on:
+      - server
+
+networks:
+  myshared-network:
 
 volumes:
   pgdata: {}
