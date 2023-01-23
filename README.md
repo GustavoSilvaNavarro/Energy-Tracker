@@ -28,6 +28,11 @@ cd Energy-Tracker
 yarn || npm i
 ```
 
+3. As another option to not deal with to install other softwares. You can use Docker, using the .env files in the backend and frontend. You can just run the following command (after that it will download everything you need to run the app and just go to http://localhost:3000):
+```shell
+docker-compose up --build
+```
+
 ### Backend
 1. Server is using SQL database, You should create a database with the name of your preferences and create a .env file with the following keys
 ```js
@@ -81,12 +86,14 @@ yarn start
 * [Sequelize](https://sequelize.org/) - ORM for SQL Databases
 * [MariaDB](https://mariadb.org/) / [PostgresSQL](https://www.postgresql.org/) - SQL Database
 * [Typescript](https://www.typescriptlang.org/) - TypeScript is a strongly typed programming language that builds on JavaScript.
+* [Docker](https://docs.docker.com/) - Backend server was dockerized to run in a Docker container
 
 ### Frontend
 * [React](https://reactjs.org/) - Front end library for building user interfaces.
 * [Tailwindcss](https://tailwindcss.com/) - CSS Framework to style applications.
 * [Typescript](https://www.typescriptlang.org/) - TypeScript is a strongly typed programming language that builds on JavaScript.
 * [PWA](https://developer.chrome.com/docs/workbox/) - Progressive Web App (Stale While Validate Strategy)
+* [Docker](https://docs.docker.com/) - Frontend server was dockerized to run in a Docker container.
 
 ## Author
 * Gustavo Silva Navarro - [GitHub](https://github.com/GustavoSilvaNavarro) - [Linkedin](https://www.linkedin.com/in/gustavo-silva-navarro/)
