@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Energy tracker will display and show meaningful data about all kind of energies in the US",
   "main": "index.js",
-  "repository": "no yet",
+  "repository": "https://github.com/GustavoSilvaNavarro/Energy-Tracker",
   "author": "Gustavo Silva <gustavo.silva.nav@gmail.com>",
   "license": "MIT",
   "scripts": {

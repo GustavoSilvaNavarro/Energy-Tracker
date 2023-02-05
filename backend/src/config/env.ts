@@ -12,7 +12,7 @@ const env = {
   statesDetailsHost: process.env.USE_STATE_RAPID_API_HOST as string,
 };
 
-if (process.env.NODE_ENV === 'testing') {
+if (process.env.NODE_ENV === 'test') {
   env.dbDataBaseName = process.env.DB_SQL_DATABASENAME_TESTS as string;
   env.dbAppPort = Number(process.env.PORT_TESTS);
 }

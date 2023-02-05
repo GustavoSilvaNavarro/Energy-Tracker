@@ -11,8 +11,8 @@ type IDetails = {
 export const ProductionDetails = ({ production, details }: { production: IProps[]; details: IDetails }) => {
   if (!Array.isArray(production) || production.length < 1) {
     return (
-      <div>
-        <p>Information did not load!</p>
+      <div className="p-4 rounded-md bg-[#374151]">
+        <p className="text-white text-2xl text-center">Information did not load!</p>
       </div>
     );
   }

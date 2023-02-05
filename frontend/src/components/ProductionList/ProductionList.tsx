@@ -19,15 +19,17 @@ export const ProductionList = () => {
   }
 
   return (
-    <div className="flex flex-wrap gap-6 justify-center">
-      <div className="relative">
+    <div
+      className={`${productionCtx.oilProductionByState.length > 0 ? 'flex flex-wrap' : 'flex'} gap-6 justify-center`}
+    >
+      <div className={`${productionCtx.oilProductionByState.length > 0 ? 'relative' : 'w-full'}`}>
         <ProductionDetails
           production={productionCtx.oilProductionByState}
           details={{ unit: 'MBBL', title: 'Monthly Oil Production by State' }}
         />
         <Loader status={productionCtx.loadingStatus} />
       </div>
-      <div className="relative">
+      <div className={`${productionCtx.oilProductionByState.length > 0 ? 'relative' : 'w-full'}`}>
         <ProductionDetails
           production={productionCtx.ngProductionByState}
           details={{ unit: 'MMCF', title: 'Monthly Natural Gas Production by State' }}

@@ -27,97 +27,122 @@ export const getMaxDate = () => {
 };
 
 export const getProductionByYear = (data: ICrudProduction, year: string) => {
-  const totalByMonth = data.response.data.reduce((acc, current) => {
-    const val = acc.find(item => item.period === current.period);
+  const total = {} as { [key: string]: { period: string; total: number } };
 
-    if (!val) {
-      return [...acc, { period: current.period, total: current.value }];
+  for (let i = data.response.data.length - 1; i >= 0; i--) {
+    const production = data.response.data[i];
+
+    if (Object.prototype.hasOwnProperty.call(total, production.period)) {
+      total[`${production.period}`].total += production.value;
+      continue;
     }
 
-    val.total += current.value;
+    total[`${production.period}`] = { period: production.period, total: production.value };
+  }
 
-    return [...acc];
-  }, [] as unknown as { period: string; total: number }[]);
+  const values = Object.values(total);
 
-  const result = {
-    dates: totalByMonth.map(item => getMonths(item.period.split('-')[1])),
-    total: totalByMonth.map(item => item.total),
-    year: year.split('-')[0],
+  const result = { dates: [], total: [], year: year.split('-')[0] } as {
+    dates: string[];
+    total: number[];
+    year: string;
   };
+
+  while (values.length > 0) {
+    const totalByMonth = values.pop();
+    if (!totalByMonth) break;
+
+    result.dates.push(getMonths(totalByMonth.period.split('-')[1]));
+    result.total.push(totalByMonth.total);
+  }
 
   return result;
 };
 
 export const getProductionByState = (data: ICrudProduction) => {
-  const totalByArea = data.response.data.reduce((acc, current) => {
-    const val = acc.find(item => item.area === current['area-name']);
+  const dataByState = {} as {
+    [key: string]: { area: string; total: number; product: string; description: string; units: string };
+  };
 
-    if (!val) {
-      return [
-        ...acc,
-        {
-          area: current['area-name'],
-          total: current.value,
-          product: current.product,
-          description: current['series-description'],
-          units: current.units,
-        },
-      ];
+  data.response.data.forEach(current => {
+    if (current['area-name'] in dataByState) {
+      dataByState[`${current['area-name']}`].total += current.value;
+    } else {
+      dataByState[`${current['area-name']}`] = {
+        area: current['area-name'],
+        total: current.value,
+        product: current.product,
+        description: current['series-description'],
+        units: current.units,
+      };
     }
+  });
 
-    val.total += current.value;
-
-    return [...acc];
-  }, [] as unknown as { area: string; total: number; product: string; description: string; units: string }[]);
-
-  return totalByArea;
+  return Object.values(dataByState);
 };
 
 export const getAccumulativeGeneration = (data: IGeneration, year: string, state: string) => {
-  const electricityByMonth = data.response.data.reduce((acc, current) => {
-    const value = acc.find(element => element.period === current.period);
+  const total = {} as { [key: string]: { period: string; total: number } };
 
-    if (!value) {
-      return [...acc, { period: current.period, total: current.generation }];
+  data.response.data.forEach(current => {
+    if (current.period in total) {
+      total[`${current.period}`].total += current.generation;
+      return;
     }
 
-    value.total += current.generation;
+    total[`${current.period}`] = { period: current.period, total: current.generation };
+  });
 
-    return [...acc];
-  }, [] as unknown as { period: string; total: number }[]);
+  const values = Object.values(total);
 
-  const result = {
-    dates: electricityByMonth.map(item => getMonths(item.period.split('-')[1])),
-    total: electricityByMonth.map(
-      (
-        sum => item =>
-          (sum += item.total)
-      )(0)
-    ),
-    year: year.split('-')[0],
-    state,
+  const result = { dates: [], total: [], year: year.split('-')[0], state } as {
+    dates: string[];
+    total: number[];
+    year: string;
+    state: string;
   };
+
+  let previousAmount = 0;
+
+  while (values.length > 0) {
+    const currentData = values.shift();
+    if (!currentData) break;
+
+    result.dates.push(getMonths(currentData.period.split('-')[1]));
+    result.total.push(previousAmount + currentData.total);
+    previousAmount += currentData.total;
+  }
 
   return result;
 };
 
 export const netGenerationByFuelType = (data: IGeneration) => {
-  const powerByFuel = data.response.data.reduce((acc, current) => {
-    const value = acc.find(item => item.fuel === current.fuelTypeDescription);
+  const powerByFuel = {} as { [key: string]: { fuel: string; total: number; fuelCode: string } };
 
-    if (!value) {
-      return [...acc, { fuel: current.fuelTypeDescription, total: current.generation, fuelCode: current.fuel2002 }];
+  data.response.data.forEach(current => {
+    if (current.fuelTypeDescription in powerByFuel) {
+      powerByFuel[`${current.fuelTypeDescription}`].total += current.generation;
+      return;
     }
 
-    value.total += current.generation;
+    powerByFuel[`${current.fuelTypeDescription}`] = {
+      fuel: current.fuelTypeDescription,
+      total: current.generation,
+      fuelCode: current.fuel2002,
+    };
+  });
 
-    return [...acc];
-  }, [] as unknown as { fuel: string; total: number; fuelCode: string }[]);
+  const dataFuelTypes = Object.values(powerByFuel);
 
-  const result = {
-    fuelTypes: powerByFuel.map(item => item.fuel),
-    total: powerByFuel.map(item => item.total),
-  };
+  const result = { fuelTypes: [], total: [] } as { fuelTypes: Array<string>; total: Array<number> };
+
+  while (dataFuelTypes.length > 0) {
+    const fuelType = dataFuelTypes.shift();
+    if (!fuelType) break;
+
+    result.fuelTypes.push(fuelType.fuel);
+    result.total.push(fuelType.total);
+  }
 
   return result;
 };

@@ -18,6 +18,7 @@
     "precaching",
     "prestart",
     "tailwindcss",
+    "tanstack",
     "tsbuildinfo",
     "TTFB"
   ],
