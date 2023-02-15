@@ -1,6 +1,7 @@
 import swaggerJsDoc from 'swagger-jsdoc';
 import path from 'path';
 
+import env from '../../config/env';
 import { stateRoutesDoc } from './states/state-paths';
 import { stateComponents } from './states/state-components';
 import { appError } from './app/error-component';
@@ -15,8 +16,8 @@ const options = {
     },
     servers: [
       {
-        url: 'http://localhost:8080/states-list',
-        description: 'Dev Mode',
+        url: `${env.apiUrl}/states-list`,
+        description: `${process.env.NODE_ENV} Mode`,
       },
     ],
     tags: [

@@ -7,6 +7,7 @@ const env = {
   dbDialect: process.env.DB_SQL_DIALECT,
   dbAppPort: Number(process.env.PORT_PROD),
   clientAppUrl: process.env.CLIENT_DOMAIN,
+  apiUrl: process.env.API_DOMAIN as string,
   statesDetailsEndpoint: process.env.USE_STATE_RAPID_API_ENDPOINT as string,
   statesDetailsSecretKey: process.env.USE_STATE_RAPID_API_KEYS as string,
   statesDetailsHost: process.env.USE_STATE_RAPID_API_HOST as string,

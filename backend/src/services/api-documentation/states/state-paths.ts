@@ -34,7 +34,7 @@ const callStates = {
   summary: 'Get States info from API',
   description: 'Call API request with the states info',
   responses: {
-    200: {
+    201: {
       description: 'Successful Response - Return the list of states confirming that were stored into DB',
       content: {
         'application/json': {
