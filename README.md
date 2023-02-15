@@ -14,6 +14,8 @@ Energy Tracker is a web application to keep track and see the trend of the Oil &
   <img src="https://user-images.githubusercontent.com/66889974/213713746-8c82712e-abec-47f8-af3c-9c0777da3a26.png" />
 
   <img src="https://user-images.githubusercontent.com/66889974/213714045-d0a63ba9-a776-428a-bd9b-16de48aab8e9.png" />
+
+  <img src="https://user-images.githubusercontent.com/66889974/219135708-df18f48c-c3aa-46d6-b2d7-4e16a41973c5.png" />
 </p>
 
 ## Getting started
@@ -87,6 +89,7 @@ yarn start
 * [MariaDB](https://mariadb.org/) / [PostgresSQL](https://www.postgresql.org/) - SQL Database
 * [Typescript](https://www.typescriptlang.org/) - TypeScript is a strongly typed programming language that builds on JavaScript.
 * [Docker](https://docs.docker.com/) - Backend server was dockerized to run in a Docker container
+* [Swagger](https://swagger.io/docs/specification/about/) - To Document the API server swagger was implemented
 
 ### Frontend
 * [React](https://reactjs.org/) - Front end library for building user interfaces.

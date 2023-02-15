@@ -1,9 +1,11 @@
 import express, { Application } from 'express';
 import cors from 'cors';
+import swaggerUI from 'swagger-ui-express';
 // import morgan from 'morgan';
 
 import env from '../config/env';
 import stateDetailsRoutes from '../routes/stateDetails-routes';
+import { specs } from '../services/api-documentation/swagger';
 import { pageNotFound } from '../middleware/pageNotFound';
 import { errorHandler } from '../middleware/error-handler';
 
@@ -20,6 +22,7 @@ app.use(
 // app.use(morgan('dev'));
 
 app.use('/states-list', stateDetailsRoutes);
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs));
 
 app.use('*', pageNotFound);
 app.use(errorHandler);
